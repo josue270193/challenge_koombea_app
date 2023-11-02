@@ -1,0 +1,26 @@
+<form [class.mat-elevation-z5]="true"
+      class="login-form"
+      #scrapperAddForm="ngForm"
+      (ngSubmit)="onAdd()">
+
+    <mat-form-field appearance="outline" class="field-50-width">
+        <mat-label>URL</mat-label>
+        <input matInput
+               placeholder="Url to Scrap"
+               [(ngModel)]="scrap.url"
+               name="url"
+               required>
+        <mat-icon matSuffix>mode_edit</mat-icon>
+        <mat-error *ngIf="!scrap.url">
+            URL is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+
+    <button mat-flat-button
+            color="primary"
+            type="submit"
+            [disabled]="!scrapperAddForm.valid"
+            class="field-submit">
+        Add
+    </button>
+</form>

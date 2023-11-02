@@ -1,0 +1,43 @@
+
+<scrapper-add />
+
+<div class="scrapper-container mat-elevation-z5">
+
+  <div class="scrapper-loading-shade" *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>
+  <div class="scrapper-table-container">
+    <table mat-table [dataSource]="data">
+      <!-- URL Column -->
+      <ng-container matColumnDef="url">
+        <th mat-header-cell *matHeaderCellDef> URL </th>
+        <td mat-cell *matCellDef="let element"> {{element.url}} </td>
+      </ng-container>
+
+      <!-- Links Found Column -->
+      <ng-container matColumnDef="links">
+        <th mat-header-cell *matHeaderCellDef> Links Found </th>
+        <td mat-cell *matCellDef="let element"> {{element.linksFound.length }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let element"> {{ getStatus(element) }} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row
+          (click)="onClick(row)"
+          *matRowDef="let row; columns: displayedColumns;">
+      </tr>
+    </table>
+  </div>
+
+  <mat-paginator [pageSizeOptions]="[1, 5, 10, 20]"
+                 showFirstLastButtons
+                 [length]="resultsLength"
+                 aria-label="Select page of elements">
+  </mat-paginator>
+</div>
+
+<pre>${{ itemSelected | json }}</pre>

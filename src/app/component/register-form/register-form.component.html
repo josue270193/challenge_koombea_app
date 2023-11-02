@@ -1,0 +1,47 @@
+<form [class.mat-elevation-z5]="true"
+      class="register-form"
+      #registerForm="ngForm"
+      (ngSubmit)="onRegister()">
+
+  <h2 class="field-text-title">Register Form</h2>
+
+  <mat-form-field appearance="outline" class="field-50-width">
+    <mat-label>Username</mat-label>
+    <input matInput
+           placeholder="Username"
+           [(ngModel)]="user.username"
+           type="email"
+           name="username"
+           required>
+    <mat-icon matSuffix>mode_edit</mat-icon>
+    <mat-error *ngIf="!user.username">
+      Username is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="field-50-width">
+    <mat-label>Password</mat-label>
+    <input matInput
+           placeholder="Password"
+           [(ngModel)]="user.password"
+           [type]="hide ? 'password' : 'text'"
+           name="password"
+           required>
+    <button mat-icon-button matSuffix (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+    <mat-error *ngIf="!user.password">
+      Password is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-flat-button
+          color="primary"
+          type="submit"
+          [disabled]="!registerForm.valid"
+          class="field-submit">
+    Create Party
+  </button>
+</form>
